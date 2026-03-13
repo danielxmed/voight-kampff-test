@@ -1,0 +1,419 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vk-bg: #0a0e17;
+  --color-vk-panel: #0d1117;
+  --color-vk-card: #111827;
+  --color-vk-border: #1e3a5f;
+  --color-vk-accent: #f59e0b;
+  --color-vk-accent-bright: #fbbf24;
+  --color-vk-accent-dim: #b45309;
+  --color-vk-cyan: #00f0ff;
+  --color-vk-danger: #ff2a6d;
+  --color-vk-success: #05ffa1;
+  --color-vk-text: #e2e8f0;
+  --color-vk-text-dim: #94a3b8;
+  --color-vk-d1: #38bdf8;
+  --color-vk-d2: #a78bfa;
+  --color-vk-d3: #ef4444;
+  --color-vk-d4: #f97316;
+  --color-vk-d5: #34d399;
+  --color-vk-d6: #f472b6;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-sans: 'Inter', ui-sans-serif, sans-serif;
+  --font-display: 'Rajdhani', 'Inter', ui-sans-serif, sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1e3a5f #0d1117;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: #0a0e17;
+  color: #e2e8f0;
+}
+
+#root {
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ============================================
+   BLADE RUNNER CRT & FILM EFFECTS
+   ============================================ */
+
+/* CRT Scanlines overlay */
+.vk-scanlines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Rolling scanline animation */
+.vk-scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 45%,
+    rgba(0, 240, 255, 0.03) 48%,
+    rgba(0, 240, 255, 0.06) 50%,
+    rgba(0, 240, 255, 0.03) 52%,
+    transparent 55%,
+    transparent 100%
+  );
+  animation: vk-rolling-scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 9998;
+}
+
+@keyframes vk-rolling-scan {
+  0% { transform: translateY(-100vh); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Film grain SVG overlay */
+.vk-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9997;
+  opacity: 0.035;
+  animation: vk-grain-shift 0.5s steps(1) infinite;
+}
+
+.vk-grain svg {
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes vk-grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Vignette overlay */
+.vk-vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 50%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+  pointer-events: none;
+  z-index: 9996;
+}
+
+/* ============================================
+   NEON GLOW UTILITIES
+   ============================================ */
+
+.glow-amber {
+  text-shadow:
+    0 0 7px rgba(245, 158, 11, 0.6),
+    0 0 20px rgba(245, 158, 11, 0.3),
+    0 0 42px rgba(245, 158, 11, 0.1);
+}
+
+.glow-cyan {
+  text-shadow:
+    0 0 7px rgba(0, 240, 255, 0.6),
+    0 0 20px rgba(0, 240, 255, 0.3),
+    0 0 42px rgba(0, 240, 255, 0.1);
+}
+
+.glow-danger {
+  text-shadow:
+    0 0 7px rgba(255, 42, 109, 0.6),
+    0 0 20px rgba(255, 42, 109, 0.3);
+}
+
+.neon-border-amber {
+  border-color: rgba(245, 158, 11, 0.4);
+  box-shadow:
+    0 0 5px rgba(245, 158, 11, 0.15),
+    0 0 20px rgba(245, 158, 11, 0.05),
+    inset 0 0 5px rgba(245, 158, 11, 0.05);
+}
+
+.neon-border-cyan {
+  border-color: rgba(0, 240, 255, 0.3);
+  box-shadow:
+    0 0 5px rgba(0, 240, 255, 0.15),
+    0 0 20px rgba(0, 240, 255, 0.05),
+    inset 0 0 5px rgba(0, 240, 255, 0.05);
+}
+
+.neon-border-danger {
+  border-color: rgba(255, 42, 109, 0.4);
+  box-shadow:
+    0 0 5px rgba(255, 42, 109, 0.15),
+    0 0 20px rgba(255, 42, 109, 0.05);
+}
+
+/* ============================================
+   CORNER BRACKET CARD STYLE
+   ============================================ */
+
+.vk-bracket {
+  position: relative;
+}
+
+.vk-bracket::before,
+.vk-bracket::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: rgba(245, 158, 11, 0.5);
+  pointer-events: none;
+}
+
+.vk-bracket::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+  border-color: inherit;
+  border-right: none;
+  border-bottom: none;
+  border-top-color: rgba(245, 158, 11, 0.5);
+  border-left-color: rgba(245, 158, 11, 0.5);
+}
+
+.vk-bracket::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+  border-top: none;
+  border-left: none;
+  border-bottom-color: rgba(245, 158, 11, 0.5);
+  border-right-color: rgba(245, 158, 11, 0.5);
+}
+
+/* Additional inner corners via child pseudo-elements */
+.vk-bracket-inner {
+  position: relative;
+}
+
+.vk-bracket-inner::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 16px;
+  height: 16px;
+  border-top: 2px solid rgba(245, 158, 11, 0.3);
+  border-right: 2px solid rgba(245, 158, 11, 0.3);
+  pointer-events: none;
+}
+
+.vk-bracket-inner::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  width: 16px;
+  height: 16px;
+  border-bottom: 2px solid rgba(245, 158, 11, 0.3);
+  border-left: 2px solid rgba(245, 158, 11, 0.3);
+  pointer-events: none;
+}
+
+/* ============================================
+   PULSE GLOW ANIMATION (for κ hero)
+   ============================================ */
+
+.pulse-glow {
+  animation: vk-pulse-glow 3s ease-in-out infinite;
+}
+
+@keyframes vk-pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 10px rgba(245, 158, 11, 0.2),
+      0 0 30px rgba(245, 158, 11, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 20px rgba(245, 158, 11, 0.4),
+      0 0 60px rgba(245, 158, 11, 0.2),
+      0 0 100px rgba(245, 158, 11, 0.05);
+  }
+}
+
+/* ============================================
+   VK READOUT STYLE
+   ============================================ */
+
+.vk-readout {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+/* ============================================
+   GLITCH EFFECT
+   ============================================ */
+
+.glitch {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.glitch::before {
+  color: #00f0ff;
+  z-index: -1;
+  animation: vk-glitch-1 4s infinite linear;
+}
+
+.glitch::after {
+  color: #ff2a6d;
+  z-index: -1;
+  animation: vk-glitch-2 4s infinite linear;
+}
+
+@keyframes vk-glitch-1 {
+  0%, 92%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  93% { clip-path: inset(20% 0 60% 0); transform: translate(-3px, 1px); }
+  95% { clip-path: inset(50% 0 20% 0); transform: translate(2px, -1px); }
+  97% { clip-path: inset(10% 0 70% 0); transform: translate(-1px, 2px); }
+}
+
+@keyframes vk-glitch-2 {
+  0%, 94%, 100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  95% { clip-path: inset(60% 0 10% 0); transform: translate(3px, -1px); }
+  97% { clip-path: inset(30% 0 40% 0); transform: translate(-2px, 1px); }
+  99% { clip-path: inset(70% 0 5% 0); transform: translate(1px, -2px); }
+}
+
+/* ============================================
+   BLINKING CURSOR
+   ============================================ */
+
+.vk-cursor::after {
+  content: '█';
+  animation: vk-blink 1s step-end infinite;
+  color: var(--color-vk-accent);
+  margin-left: 2px;
+}
+
+@keyframes vk-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* ============================================
+   VK INPUT STYLE
+   ============================================ */
+
+.vk-input {
+  caret-color: #f59e0b;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.vk-input:focus {
+  border-color: rgba(30, 58, 95, 0.8);
+  box-shadow:
+    0 0 5px rgba(245, 158, 11, 0.15),
+    0 0 15px rgba(0, 240, 255, 0.05);
+  outline: none;
+}
+
+/* ============================================
+   SIDEBAR INSTRUMENT PANEL
+   ============================================ */
+
+.vk-sidebar {
+  background: linear-gradient(180deg, #0d1117 0%, #0a0e17 100%);
+  border-right: 1px solid rgba(30, 58, 95, 0.6);
+  box-shadow: 1px 0 15px rgba(0, 240, 255, 0.03);
+}
+
+.vk-nav-item {
+  position: relative;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  transition: all 0.2s;
+}
+
+.vk-nav-item:hover {
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.05) 0%, transparent 100%);
+}
+
+.vk-nav-active {
+  border-left-color: #f59e0b;
+  color: #f59e0b;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+  background: linear-gradient(90deg, rgba(245, 158, 11, 0.08) 0%, transparent 100%);
+}
+
+/* ============================================
+   VK DIVIDER WITH TEXT
+   ============================================ */
+
+.vk-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(148, 163, 184, 0.4);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.vk-divider::before,
+.vk-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(30, 58, 95, 0.6), transparent);
+}
+
+/* ============================================
+   HOVER GLOW ON CARDS
+   ============================================ */
+
+.vk-card-hover {
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.vk-card-hover:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow:
+    0 0 10px rgba(245, 158, 11, 0.08),
+    0 0 30px rgba(245, 158, 11, 0.03);
+}
