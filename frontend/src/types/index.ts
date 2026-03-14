@@ -85,12 +85,12 @@ export interface ComparisonResult {
 }
 
 export const DIMENSION_COLORS: Record<string, string> = {
-  D1: '#38bdf8',
-  D2: '#a78bfa',
-  D3: '#ef4444',
-  D4: '#f97316',
-  D5: '#34d399',
-  D6: '#f472b6',
+  D1: '#5ef5ff',   // --br-cyan-bright
+  D2: '#ff5aaf',   // --br-magenta-bright
+  D3: '#ff6b6b',   // --br-red-bright
+  D4: '#f5c542',   // --br-amber-bright
+  D5: '#2dd4a8',   // --br-success
+  D6: '#e5147a',   // --br-magenta
 };
 
 export const DIMENSION_NAMES: Record<string, string> = {

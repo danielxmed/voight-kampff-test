@@ -1,0 +1,401 @@
+/* ============================================================
+   BLADE RUNNER DESIGN SYSTEM
+   A complete CSS design system inspired by the neon-noir
+   aesthetic of Blade Runner's dystopian Los Angeles.
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap');
+
+/* ============================================================
+   1. CUSTOM PROPERTIES — COLOR PALETTE
+   ============================================================ */
+:root {
+  /* Base / Backgrounds */
+  --br-black:          #0a0a0f;
+  --br-near-black:     #0d0d14;
+  --br-dark:           #12121c;
+  --br-dark-mid:       #1a1a2e;
+  --br-mid:            #242438;
+  --br-muted:          #2e2e45;
+
+  /* Primary — Amber */
+  --br-amber-dim:      #6b4a00;
+  --br-amber:          #d4a017;
+  --br-amber-bright:   #f5c542;
+  --br-amber-glow:     rgba(212, 160, 23, 0.6);
+  --br-amber-subtle:   rgba(212, 160, 23, 0.15);
+
+  /* Secondary — Cyan */
+  --br-cyan-dim:       #0a5e6b;
+  --br-cyan:           #14d9e5;
+  --br-cyan-bright:    #5ef5ff;
+  --br-cyan-glow:      rgba(20, 217, 229, 0.6);
+  --br-cyan-subtle:    rgba(20, 217, 229, 0.12);
+
+  /* Accent — Magenta / Neon Pink */
+  --br-magenta-dim:    #6b1450;
+  --br-magenta:        #e5147a;
+  --br-magenta-bright: #ff5aaf;
+  --br-magenta-glow:   rgba(229, 20, 122, 0.6);
+
+  /* Accent — Red / Warning */
+  --br-red-dim:        #6b1414;
+  --br-red:            #e53e3e;
+  --br-red-bright:     #ff6b6b;
+  --br-red-glow:       rgba(229, 62, 62, 0.5);
+
+  /* Neutral / Text */
+  --br-text-primary:   #e8e6df;
+  --br-text-secondary: #a09c90;
+  --br-text-muted:     #605c52;
+  --br-text-inverse:   #0a0a0f;
+
+  /* Functional */
+  --br-success:        #2dd4a8;
+  --br-warning:        var(--br-amber);
+  --br-error:          var(--br-red);
+  --br-info:           var(--br-cyan);
+
+  /* Shadows & Overlays */
+  --br-shadow-sm:      0 1px 3px rgba(0, 0, 0, 0.5);
+  --br-shadow-md:      0 4px 12px rgba(0, 0, 0, 0.6);
+  --br-shadow-lg:      0 8px 30px rgba(0, 0, 0, 0.7);
+  --br-shadow-amber:   0 0 15px var(--br-amber-glow);
+  --br-shadow-cyan:    0 0 15px var(--br-cyan-glow);
+  --br-overlay:        rgba(10, 10, 15, 0.85);
+
+  /* ============================================================
+     2. TYPOGRAPHY SCALE
+     ============================================================ */
+  --br-font-mono:      'Share Tech Mono', 'Courier New', monospace;
+  --br-font-display:   'Rajdhani', 'Segoe UI', sans-serif;
+
+  --br-text-xs:        0.75rem;    /* 12px */
+  --br-text-sm:        0.875rem;   /* 14px */
+  --br-text-base:      1rem;       /* 16px */
+  --br-text-lg:        1.125rem;   /* 18px */
+  --br-text-xl:        1.25rem;    /* 20px */
+  --br-text-2xl:       1.5rem;     /* 24px */
+  --br-text-3xl:       1.875rem;   /* 30px */
+  --br-text-4xl:       2.25rem;    /* 36px */
+  --br-text-5xl:       3rem;       /* 48px */
+  --br-text-6xl:       3.75rem;    /* 60px */
+
+  --br-leading-tight:  1.2;
+  --br-leading-normal: 1.5;
+  --br-leading-loose:  1.75;
+
+  --br-tracking-tight: -0.02em;
+  --br-tracking-normal: 0.02em;
+  --br-tracking-wide:  0.08em;
+  --br-tracking-wider: 0.15em;
+
+  /* ============================================================
+     3. SPACING & LAYOUT
+     ============================================================ */
+  --br-space-1:        0.25rem;
+  --br-space-2:        0.5rem;
+  --br-space-3:        0.75rem;
+  --br-space-4:        1rem;
+  --br-space-6:        1.5rem;
+  --br-space-8:        2rem;
+  --br-space-12:       3rem;
+  --br-space-16:       4rem;
+
+  --br-radius-sm:      2px;
+  --br-radius-md:      4px;
+  --br-radius-lg:      8px;
+
+  --br-border-thin:    1px;
+  --br-border-medium:  2px;
+
+  /* ============================================================
+     4. TRANSITIONS
+     ============================================================ */
+  --br-transition-fast:   150ms ease;
+  --br-transition-normal: 300ms ease;
+  --br-transition-slow:   600ms ease;
+}
+
+/* ============================================================
+   5. KEYFRAME ANIMATIONS
+   ============================================================ */
+
+/* Flicker — simulates a failing fluorescent / CRT tube */
+@keyframes br-flicker {
+  0%, 100%  { opacity: 1; }
+  3%        { opacity: 0.85; }
+  6%        { opacity: 1; }
+  7%        { opacity: 0.7; }
+  9%        { opacity: 1; }
+  42%       { opacity: 0.95; }
+  44%       { opacity: 1; }
+  63%       { opacity: 0.92; }
+  65%       { opacity: 1; }
+  92%       { opacity: 0.88; }
+  94%       { opacity: 1; }
+}
+
+/* Glitch clip — horizontal slice displacement */
+@keyframes br-glitch-clip {
+  0%        { clip-path: inset(0 0 100% 0); }
+  5%        { clip-path: inset(40% 0 30% 0); transform: translateX(-4px); }
+  10%       { clip-path: inset(80% 0 5% 0);  transform: translateX(6px); }
+  15%       { clip-path: inset(10% 0 60% 0);  transform: translateX(-2px); }
+  20%       { clip-path: inset(0 0 100% 0);   transform: translateX(0); }
+  100%      { clip-path: inset(0 0 100% 0);   transform: translateX(0); }
+}
+
+/* Typewriter — reveal text character by character via width */
+@keyframes br-typewriter {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+/* Typewriter cursor blink (companion animation) */
+@keyframes br-blink-caret {
+  0%, 100% { border-right-color: transparent; }
+  50%      { border-right-color: var(--br-amber); }
+}
+
+/* Neon pulse — breathing glow effect */
+@keyframes br-neon-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 4px currentColor,
+      0 0 11px currentColor,
+      0 0 19px currentColor;
+    opacity: 1;
+  }
+  50% {
+    text-shadow:
+      0 0 2px currentColor,
+      0 0 6px currentColor,
+      0 0 12px currentColor;
+    opacity: 0.88;
+  }
+}
+
+/* Scanline scroll — for the overlay effect */
+@keyframes br-scanline-scroll {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Fade in from below */
+@keyframes br-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   6. UTILITY CLASSES
+   ============================================================ */
+
+/* --- .br-panel ---
+   A dark translucent container with a subtle border,
+   suitable for cards, modals, and content sections.        */
+.br-panel {
+  background: var(--br-dark);
+  border: var(--br-border-thin) solid var(--br-muted);
+  border-radius: var(--br-radius-md);
+  padding: var(--br-space-6);
+  box-shadow: var(--br-shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.br-panel--amber {
+  border-color: var(--br-amber-dim);
+  box-shadow: var(--br-shadow-md), inset 0 0 30px var(--br-amber-subtle);
+}
+
+.br-panel--cyan {
+  border-color: var(--br-cyan-dim);
+  box-shadow: var(--br-shadow-md), inset 0 0 30px var(--br-cyan-subtle);
+}
+
+/* --- .br-glow ---
+   Applies a neon glow to text or box elements.
+   Use modifier classes for color variants.                 */
+.br-glow {
+  text-shadow:
+    0 0 4px var(--br-amber-glow),
+    0 0 12px var(--br-amber-glow),
+    0 0 22px var(--br-amber-glow);
+}
+
+.br-glow--cyan {
+  text-shadow:
+    0 0 4px var(--br-cyan-glow),
+    0 0 12px var(--br-cyan-glow),
+    0 0 22px var(--br-cyan-glow);
+}
+
+.br-glow--magenta {
+  text-shadow:
+    0 0 4px var(--br-magenta-glow),
+    0 0 12px var(--br-magenta-glow),
+    0 0 22px var(--br-magenta-glow);
+}
+
+.br-glow--box {
+  box-shadow:
+    0 0 6px var(--br-amber-glow),
+    0 0 18px var(--br-amber-glow),
+    inset 0 0 12px var(--br-amber-subtle);
+}
+
+.br-glow--box-cyan {
+  box-shadow:
+    0 0 6px var(--br-cyan-glow),
+    0 0 18px var(--br-cyan-glow),
+    inset 0 0 12px var(--br-cyan-subtle);
+}
+
+/* --- .br-scanlines ---
+   Adds a CRT scanline overlay via ::after pseudo-element.
+   Apply to a positioned container.                         */
+.br-scanlines {
+  position: relative;
+  overflow: hidden;
+}
+
+.br-scanlines::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+  animation: br-scanline-scroll 8s linear infinite;
+  opacity: 0.4;
+}
+
+/* Static variant — no animation, lighter performance cost */
+.br-scanlines--static::after {
+  animation: none;
+  opacity: 0.3;
+}
+
+/* --- .br-glitch ---
+   Glitch distortion effect for headings and emphasis text.
+   Uses pseudo-elements for the displaced color layers.     */
+.br-glitch {
+  position: relative;
+  display: inline-block;
+  animation: br-flicker 4s infinite;
+}
+
+.br-glitch::before,
+.br-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.br-glitch::before {
+  color: var(--br-cyan-bright);
+  animation: br-glitch-clip 3s infinite linear alternate-reverse;
+  z-index: -1;
+}
+
+.br-glitch::after {
+  color: var(--br-magenta-bright);
+  animation: br-glitch-clip 2.5s infinite linear alternate;
+  animation-delay: -1s;
+  z-index: -1;
+}
+
+/* ============================================================
+   7. COMPONENT HELPERS
+   ============================================================ */
+
+/* Typewriter text container */
+.br-typewriter {
+  font-family: var(--br-font-mono);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--br-amber);
+  width: 0;
+  animation:
+    br-typewriter 3s steps(40) forwards,
+    br-blink-caret 0.75s step-end infinite;
+}
+
+/* Neon-pulsing text */
+.br-neon {
+  animation: br-neon-pulse 2.5s ease-in-out infinite;
+}
+
+.br-neon--amber  { color: var(--br-amber-bright); }
+.br-neon--cyan   { color: var(--br-cyan-bright); }
+
+/* Fade-in entrance */
+.br-fade-up {
+  animation: br-fade-up 0.6s ease-out both;
+}
+
+/* Typography presets */
+.br-mono {
+  font-family: var(--br-font-mono);
+  letter-spacing: var(--br-tracking-wide);
+}
+
+.br-display {
+  font-family: var(--br-font-display);
+  font-weight: 600;
+  letter-spacing: var(--br-tracking-wider);
+  text-transform: uppercase;
+}
+
+/* Horizontal rule — styled divider */
+.br-divider {
+  border: none;
+  height: var(--br-border-thin);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--br-amber-dim),
+    var(--br-amber),
+    var(--br-amber-dim),
+    transparent
+  );
+  margin: var(--br-space-8) 0;
+}
+
+.br-divider--cyan {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--br-cyan-dim),
+    var(--br-cyan),
+    var(--br-cyan-dim),
+    transparent
+  );
+}
+
+/* Status indicator dot */
+.br-status {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--br-success);
+  box-shadow: 0 0 6px var(--br-success);
+  animation: br-neon-pulse 2s ease-in-out infinite;
+}
+
+.br-status--warning { background: var(--br-amber); box-shadow: 0 0 6px var(--br-amber-glow); }
+.br-status--error   { background: var(--br-red);   box-shadow: 0 0 6px var(--br-red-glow); }

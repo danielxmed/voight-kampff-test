@@ -19,7 +19,7 @@ import { DIMENSION_COLORS, DIMENSION_NAMES } from '../types';
 import type { Session, ComparisonResult } from '../types';
 import { cn } from '../lib/utils';
 
-const CHART_COLORS = ['#f59e0b', '#00f0ff', '#a78bfa', '#05ffa1', '#ff2a6d', '#f472b6'];
+const CHART_COLORS = ['#d4a017', '#14d9e5', '#ff5aaf', '#2dd4a8', '#e5147a', '#f5c542'];
 
 export default function ComparisonPage() {
   const [selected, setSelected] = useState<string[]>([]);
@@ -158,14 +158,14 @@ export default function ComparisonPage() {
             </h2>
             <ResponsiveContainer width="100%" height={400}>
               <RadarChart data={radarData}>
-                <PolarGrid stroke="#1e3a5f" />
+                <PolarGrid stroke="#2e2e45" />
                 <PolarAngleAxis
                   dataKey="dimension"
-                  tick={{ fill: '#94a3b8', fontSize: 12, fontFamily: 'JetBrains Mono, monospace' }}
+                  tick={{ fill: '#a09c90', fontSize: 12, fontFamily: 'Share Tech Mono, monospace' }}
                 />
                 <PolarRadiusAxis
                   domain={[0, 1]}
-                  tick={{ fill: '#1e3a5f', fontSize: 10 }}
+                  tick={{ fill: '#2e2e45', fontSize: 10 }}
                   axisLine={false}
                 />
                 {result.sessions.map((s, i) => (
@@ -181,7 +181,7 @@ export default function ComparisonPage() {
                   />
                 ))}
                 <Legend
-                  wrapperStyle={{ fontSize: 12, color: '#94a3b8', fontFamily: 'JetBrains Mono, monospace' }}
+                  wrapperStyle={{ fontSize: 12, color: '#a09c90', fontFamily: 'Share Tech Mono, monospace' }}
                 />
               </RadarChart>
             </ResponsiveContainer>

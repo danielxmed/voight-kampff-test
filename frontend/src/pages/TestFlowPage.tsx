@@ -221,7 +221,7 @@ export default function TestFlowPage() {
               <div className="bg-vk-bg border border-vk-border p-5 mb-6 relative">
                 <div className="absolute inset-0 opacity-[0.02] pointer-events-none"
                   style={{
-                    background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(0,240,255,0.1) 2px, rgba(0,240,255,0.1) 4px)'
+                    background: 'repeating-linear-gradient(to bottom, transparent 0px, transparent 2px, rgba(20,217,229,0.1) 2px, rgba(20,217,229,0.1) 4px)'
                   }}
                 />
                 <p className="text-vk-text leading-relaxed font-mono text-sm relative">
