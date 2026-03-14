@@ -157,7 +157,7 @@ export default function ScoringDashboardPage() {
         {/* Radial amber gradient behind */}
         <div className="absolute inset-0 opacity-20 pointer-events-none"
           style={{
-            background: 'radial-gradient(circle at center, rgba(245,158,11,0.3) 0%, transparent 60%)'
+            background: 'radial-gradient(circle at center, rgba(212,160,23,0.3) 0%, transparent 60%)'
           }}
         />
         <div className="vk-bracket-inner relative">
@@ -171,7 +171,7 @@ export default function ScoringDashboardPage() {
                 className="h-full bg-vk-accent transition-all duration-1000"
                 style={{
                   width: `${Math.min(report.kampff_index * 100, 100)}%`,
-                  boxShadow: '0 0 10px rgba(245,158,11,0.5)',
+                  boxShadow: '0 0 10px rgba(212,160,23,0.5)',
                 }}
               />
             </div>
@@ -196,24 +196,24 @@ export default function ScoringDashboardPage() {
           </h2>
           <ResponsiveContainer width="100%" height={320}>
             <RadarChart data={radarData}>
-              <PolarGrid stroke="#1e3a5f" />
+              <PolarGrid stroke="#2e2e45" />
               <PolarAngleAxis
                 dataKey="dimension"
-                tick={{ fill: '#94a3b8', fontSize: 12, fontFamily: 'JetBrains Mono, monospace' }}
+                tick={{ fill: '#a09c90', fontSize: 12, fontFamily: 'Share Tech Mono, monospace' }}
               />
               <PolarRadiusAxis
                 domain={[0, 1]}
-                tick={{ fill: '#1e3a5f', fontSize: 10 }}
+                tick={{ fill: '#2e2e45', fontSize: 10 }}
                 axisLine={false}
               />
               <Radar
                 name="kappa"
                 dataKey="kappa"
-                stroke="#f59e0b"
-                fill="#f59e0b"
+                stroke="#d4a017"
+                fill="#d4a017"
                 fillOpacity={0.15}
                 strokeWidth={2}
-                style={{ filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.4))' }}
+                style={{ filter: 'drop-shadow(0 0 6px rgba(212,160,23,0.4))' }}
               />
             </RadarChart>
           </ResponsiveContainer>
@@ -226,24 +226,24 @@ export default function ScoringDashboardPage() {
           </h2>
           <ResponsiveContainer width="100%" height={320}>
             <LineChart data={progressionData}>
-              <CartesianGrid stroke="#1e3a5f" strokeDasharray="3 3" />
+              <CartesianGrid stroke="#2e2e45" strokeDasharray="3 3" />
               <XAxis
                 dataKey="round"
-                tick={{ fill: '#94a3b8', fontSize: 12, fontFamily: 'JetBrains Mono, monospace' }}
+                tick={{ fill: '#a09c90', fontSize: 12, fontFamily: 'Share Tech Mono, monospace' }}
               />
               <YAxis
                 domain={[0, 10]}
-                tick={{ fill: '#94a3b8', fontSize: 12 }}
+                tick={{ fill: '#a09c90', fontSize: 12 }}
               />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: '#111827',
-                  border: '1px solid #1e3a5f',
+                  backgroundColor: '#12121c',
+                  border: '1px solid #2e2e45',
                   borderRadius: '0px',
-                  color: '#e2e8f0',
-                  fontFamily: 'JetBrains Mono, monospace',
+                  color: '#e8e6df',
+                  fontFamily: 'Share Tech Mono, monospace',
                   fontSize: 12,
-                  boxShadow: '0 0 15px rgba(0,240,255,0.1)',
+                  boxShadow: '0 0 15px rgba(20,217,229,0.1)',
                 }}
                 formatter={(value: any, _name: any, props: any) => [
                   `${Number(value).toFixed(2)} (${props.payload.intensity})`,
@@ -253,11 +253,11 @@ export default function ScoringDashboardPage() {
               <Line
                 type="monotone"
                 dataKey="score"
-                stroke="#f59e0b"
+                stroke="#d4a017"
                 strokeWidth={2}
-                dot={{ fill: '#f59e0b', r: 5, stroke: '#f59e0b', strokeWidth: 1 }}
-                activeDot={{ r: 7, stroke: '#fbbf24', strokeWidth: 2 }}
-                style={{ filter: 'drop-shadow(0 0 4px rgba(245,158,11,0.4))' }}
+                dot={{ fill: '#d4a017', r: 5, stroke: '#d4a017', strokeWidth: 1 }}
+                activeDot={{ r: 7, stroke: '#f5c542', strokeWidth: 2 }}
+                style={{ filter: 'drop-shadow(0 0 4px rgba(212,160,23,0.4))' }}
               />
             </LineChart>
           </ResponsiveContainer>
@@ -331,28 +331,28 @@ export default function ScoringDashboardPage() {
         </h2>
         <ResponsiveContainer width="100%" height={200}>
           <BarChart data={distributionData}>
-            <CartesianGrid stroke="#1e3a5f" strokeDasharray="3 3" />
+            <CartesianGrid stroke="#2e2e45" strokeDasharray="3 3" />
             <XAxis
               dataKey="score"
-              tick={{ fill: '#94a3b8', fontSize: 12, fontFamily: 'JetBrains Mono, monospace' }}
+              tick={{ fill: '#a09c90', fontSize: 12, fontFamily: 'Share Tech Mono, monospace' }}
             />
-            <YAxis tick={{ fill: '#94a3b8', fontSize: 12 }} allowDecimals={false} />
+            <YAxis tick={{ fill: '#a09c90', fontSize: 12 }} allowDecimals={false} />
             <Tooltip
               contentStyle={{
-                backgroundColor: '#111827',
-                border: '1px solid #1e3a5f',
+                backgroundColor: '#12121c',
+                border: '1px solid #2e2e45',
                 borderRadius: '0px',
-                color: '#e2e8f0',
+                color: '#e8e6df',
                 fontSize: 12,
-                fontFamily: 'JetBrains Mono, monospace',
-                boxShadow: '0 0 15px rgba(0,240,255,0.1)',
+                fontFamily: 'Share Tech Mono, monospace',
+                boxShadow: '0 0 15px rgba(20,217,229,0.1)',
               }}
             />
             <Bar dataKey="count" radius={[2, 2, 0, 0]}>
               {distributionData.map((entry) => (
                 <Cell
                   key={entry.score}
-                  fill={entry.score <= 2 ? '#1e3a5f' : entry.score <= 4 ? '#94a3b8' : entry.score <= 6 ? '#f59e0b' : entry.score <= 8 ? '#f97316' : '#ff2a6d'}
+                  fill={entry.score <= 2 ? '#2e2e45' : entry.score <= 4 ? '#a09c90' : entry.score <= 6 ? '#d4a017' : entry.score <= 8 ? '#f5c542' : '#e5147a'}
                 />
               ))}
             </Bar>
@@ -380,10 +380,10 @@ export default function ScoringDashboardPage() {
                 style={{
                   backgroundColor:
                     pattern.severity === 'critical'
-                      ? 'rgba(255,42,109,0.05)'
+                      ? 'rgba(229,20,122,0.05)'
                       : pattern.severity === 'high'
-                      ? 'rgba(249,115,22,0.05)'
-                      : 'rgba(245,158,11,0.05)',
+                      ? 'rgba(212,160,23,0.05)'
+                      : 'rgba(245,197,66,0.05)',
                 }}
               >
                 <div className="flex items-start gap-2">
@@ -392,10 +392,10 @@ export default function ScoringDashboardPage() {
                     style={{
                       color:
                         pattern.severity === 'critical'
-                          ? '#ff2a6d'
+                          ? '#e5147a'
                           : pattern.severity === 'high'
-                          ? '#f97316'
-                          : '#f59e0b',
+                          ? '#d4a017'
+                          : '#f5c542',
                     }}
                   />
                   <div>
